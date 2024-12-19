@@ -21,7 +21,24 @@ function startGame() {
   document.querySelector(".master-screen").classList.add("active");
 }
 
-function setMasterNumber() {}
+function setMasterNumber() {
+  const input = document.getElementById("masterNumber");
+  const number = parseInt(input.valeu);
+
+  if (number < 1 || number > 50 || isNaN(number)) {
+    showModal("Por favor,escolha um número entre 1 e 50");
+    return;
+  }
+
+  masterNumber = number;
+  document.getElementById("masterMessage").textContent =
+    "Passe o celular para a pessoa que vai adivinhar!";
+  setTimeout(() => {
+    document.querySelector(".master-screen").classList.remove("active");
+    document.querySelector(".game-screen").classList.add("active");
+    initializeGame();
+  }, 2000);
+}
 
 function initializeGame() {}
 

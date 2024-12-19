@@ -40,7 +40,33 @@ function setMasterNumber() {
   }, 2000);
 }
 
-function initializeGame() {}
+function initializeGame() {
+  const grid = document.getElementById("numberGrid");
+  grid.innerHTML = "";
+  chances = 3;
+  randomTasks = {};
+  isProcessingGuess = false;
+
+  const taskPositions = new Set();
+  while (taskPositions.size < 10) {
+    taskPositions.add(Math.floor(Math.random() * 50) + 1);
+  }
+
+  taskPositions.forEach((pos) => {
+    randomTasks[pos] = tasks[Math.floor(Math.random() * tasks.length)];
+  });
+
+  // Criar os botões
+  for (let i = 1; i <= 50; i++) {
+    const button = document.createElement("button");
+    button.className = "number-button";
+    button.textContent = i;
+    button.onclick = () => guessNumber(i);
+    grid.appendChild(button);
+  }
+
+  startTimer();
+}
 
 async function guessNumber(number) {}
 

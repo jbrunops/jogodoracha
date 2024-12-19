@@ -23,16 +23,16 @@ function startGame() {
 
 function setMasterNumber() {
   const input = document.getElementById("masterNumber");
-  const number = parseInt(input.valeu);
+  const number = parseInt(input.value);
 
   if (number < 1 || number > 50 || isNaN(number)) {
-    showModal("Por favor,escolha um número entre 1 e 50");
+    showModal("Por favor, escolha um número entre 1 e 50");
     return;
   }
 
   masterNumber = number;
   document.getElementById("masterMessage").textContent =
-    "Passe o celular para a pessoa que vai adivinhar!";
+    "Passe o celular para a pessoa que vai adivinhar";
   setTimeout(() => {
     document.querySelector(".master-screen").classList.remove("active");
     document.querySelector(".game-screen").classList.add("active");
@@ -47,6 +47,7 @@ function initializeGame() {
   randomTasks = {};
   isProcessingGuess = false;
 
+  // Assign random tasks
   const taskPositions = new Set();
   while (taskPositions.size < 10) {
     taskPositions.add(Math.floor(Math.random() * 50) + 1);
@@ -56,7 +57,7 @@ function initializeGame() {
     randomTasks[pos] = tasks[Math.floor(Math.random() * tasks.length)];
   });
 
-  // Criar os botões
+  // Create number buttons
   for (let i = 1; i <= 50; i++) {
     const button = document.createElement("button");
     button.className = "number-button";
@@ -72,29 +73,37 @@ async function guessNumber(number) {
   if (isProcessingGuess) return;
   isProcessingGuess = true;
 
-  const button = document.querySelectorAll(".number-button");
+  const buttons = document.querySelectorAll(".number-button");
 
-  // Desativar números
+  // Disable numbers based on guess
   buttons.forEach((button) => {
     const buttonNumber = parseInt(button.textContent);
     if (number > masterNumber && buttonNumber >= number) {
-      button.desabled = true;
-    } else if (number < masterNumber % buttonNumber <= number) {
+      button.disabled = true;
+    } else if (number < masterNumber && buttonNumber <= number) {
       button.disabled = true;
     }
   });
 
-  // Verificar números
+  // Check if number has a task and show it first
+  if (randomTasks[number]) {
+    await new Promise((resolve) => {
+      showModal(randomTasks[number], false, resolve);
+    });
+  }
+
+  // Check if player found the master's number
   if (number === masterNumber) {
     showModal("Você acertou! O mestre bebe uma dose!");
     stopTimer();
     setTimeout(() => {
-      showModal("NOVO JOGOS?", true);
+      showModal("NOVO JOGO?", true);
     }, 2000);
     isProcessingGuess = false;
     return;
   }
 
+  // Check if player trapped the master
   const remainingButtons = Array.from(buttons).filter(
     (button) => !button.disabled
   );
@@ -111,6 +120,7 @@ async function guessNumber(number) {
     return;
   }
 
+  // Decrease chances only after checking for win conditions
   chances--;
 
   if (chances === 0) {
@@ -122,6 +132,7 @@ async function guessNumber(number) {
     isProcessingGuess = false;
     return;
   }
+
   isProcessingGuess = false;
 }
 

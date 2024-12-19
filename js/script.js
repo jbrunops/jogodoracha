@@ -94,6 +94,35 @@ async function guessNumber(number) {
     isProcessingGuess = false;
     return;
   }
+
+  const remainingButtons = Array.from(buttons).filter(
+    (button) => !button.disabled
+  );
+  if (
+    remainingButtons.length === 1 &&
+    remainingButtons[0].textContent == masterNumber
+  ) {
+    showModal("Você imprensou o mestre! Ele bebe uma dose!");
+    stopTimer();
+    setTimeout(() => {
+      showModal("NOVO JOGO?", true);
+    }, 2000);
+    isProcessingGuess = false;
+    return;
+  }
+
+  chances--;
+
+  if (chances === 0) {
+    showModal("VOCÊ PERDEU! BEBA UMA DOSE!");
+    stopTimer();
+    setTimeout(() => {
+      initializeGame();
+    }, 2000);
+    isProcessingGuess = false;
+    return;
+  }
+  isProcessingGuess = false;
 }
 
 function showModal() {}

@@ -125,9 +125,32 @@ async function guessNumber(number) {
   isProcessingGuess = false;
 }
 
-function showModal() {}
+function showModal(message, isNewGame = false, callback = null) {
+  const modal = document.getElementById("modal");
+  const modalMessage = document.getElementById("modalMessage");
+  const button = modal.querySelector(".button");
 
-function closeModal() {}
+  modalMessage.textContent = message;
+  modal.style.display = "flex";
+
+  if (isNewGame) {
+    button.onclick = () => {
+      closeModal();
+      document.querySelector(".game-screen").classList.remove("active");
+      document.querySelector(".welcome-screen").classList.add("active");
+      if (callback) callback();
+    };
+  } else {
+    button.onclick = () => {
+      closeModal();
+      if (callback) callback();
+    };
+  }
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
 
 function startTimer() {
   timer = 0;

@@ -143,3 +143,25 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   animation: scaleUp 0.3s ease-out;
 }
+
+input[type="number"] {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  width: clamp´(8rem, 20vw, 12rem);
+  text-align: center;
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--success);
+  box-shadow: 0 0 10px rgba(12, 185, 129, 0.3);
+}
+
+.master-icon {
+  animation: floar 2s ease-in-out infinite;
+}

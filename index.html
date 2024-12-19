@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo da Galera do Racha v2.0</title>
+    <link rel="stylesheet" href="css/index.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Welcome Screen Active -->
+      <div class="welcome-screen active">
+        <h1 class="title">Bem-vindo ao jogo do racha</h1>
+        <p>Só jogue se aguentar!</p>
+        <button class="button" onclick="startGame()">NOVO JOGO</button>
+      </div>
+
+      <div class="master-screen">
+        <img
+          src="assets/icon/drink.svg"
+          width="48px"
+          class="master-icon"
+          alt="Drink SVG"
+        />
+        <h2>Mestre, escolha um número entre 1 e 50</h2>
+
+        <input type="number" min="1" max="50" id="masterNumber" />
+        <button class="button" onclick="setMasterNumber()">ADIVINHAR!</button>
+        <p id="masterMessage"></p>
+      </div>
+
+      <div class="game-screen">
+        <div class="timer">Tempo: 00:00</div>
+        <div class="number-grid" id="numberGrid"></div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <h2 id="modalMessage"></h2>
+        <button class="button" onclick="closeModal()">OK</button>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -68,7 +68,33 @@ function initializeGame() {
   startTimer();
 }
 
-async function guessNumber(number) {}
+async function guessNumber(number) {
+  if (isProcessingGuess) return;
+  isProcessingGuess = true;
+
+  const button = document.querySelectorAll(".number-button");
+
+  // Desativar números
+  buttons.forEach((button) => {
+    const buttonNumber = parseInt(button.textContent);
+    if (number > masterNumber && buttonNumber >= number) {
+      button.desabled = true;
+    } else if (number < masterNumber % buttonNumber <= number) {
+      button.disabled = true;
+    }
+  });
+
+  // Verificar números
+  if (number === masterNumber) {
+    showModal("Você acertou! O mestre bebe uma dose!");
+    stopTimer();
+    setTimeout(() => {
+      showModal("NOVO JOGOS?", true);
+    }, 2000);
+    isProcessingGuess = false;
+    return;
+  }
+}
 
 function showModal() {}
 

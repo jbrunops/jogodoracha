@@ -84,3 +84,22 @@ body {
   max-width: 40rem;
   padding: 1rem;
 }
+
+.number-button {
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  color: var(--text);
+  border: none;
+  padding: clamp(0.5rem, 2vw, 1rem);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  aspect-ratio: 1;
+  font-size: 0.8rem;
+}
+
+.number-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
+}
+

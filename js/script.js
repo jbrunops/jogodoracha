@@ -74,6 +74,17 @@ function showModal() {}
 
 function closeModal() {}
 
-function startTimer() {}
+function startTimer() {
+  timer = 0;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timer++;
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    document.querySelector(".timer").textContent = `Tempo: ${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  }, 1000);
+}
 
 function stopTimer() {}

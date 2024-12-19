@@ -87,4 +87,6 @@ function startTimer() {
   }, 1000);
 }
 
-function stopTimer() {}
+function stopTimer() {
+  clearInterval(timerInterval);
+}

@@ -1,6 +1,6 @@
 // variáveis
 let masterNumber = 0;
-let chances = 3;
+let chances = 1;
 let timer = 0;
 let timerInterval;
 const tasks = [
